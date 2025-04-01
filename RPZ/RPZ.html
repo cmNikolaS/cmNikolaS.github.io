@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPZ - Competition Problems</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1A1A1F;
+            color: #ffffff;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #1e1e1e;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #00bcd4;
+        }
+
+        section {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .competition-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .competition-row {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .competition-title {
+            font-size: 2rem;
+            color: #ce1717;
+            margin-bottom: 20px;
+        }
+
+        .year-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .year-card {
+            background-color: #222;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(191, 174, 194, 0.1);
+        }
+
+        .year-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
+        }
+
+        .year-card a {
+            color: #00bcd4;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .year-card a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>RPZ - Takmičarski Zadaci</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Početna</a></li>
+                <li><a href="#">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="competition-container">
+        <!-- Regional Competitions FIRST -->
+        <div class="competition-row">
+            <h2 class="competition-title">REGIONAL</h2>
+            <div class="year-grid">
+                <script>
+                    for (let year = 2025; year >= 2012; year--) {
+                        document.write(`
+                            <div class="year-card">
+                                <a href="/RPZ/PAGES/regional_${year}.html">${year}</a>
+                            </div>
+                        `);
+                    }
+                </script>
+            </div>
+        </div>
+        <!-- Republic Competitions SECOND -->
+        <div class="competition-row">
+            <h2 class="competition-title">REPUBLIC</h2>
+            <div class="year-grid">
+                <script>
+                    for (let year = 2025; year >= 2012; year--) {
+                        document.write(`
+                            <div class="year-card">
+                                <a href="/RPZ/PAGES/republic_${year}.html">${year}</a>
+                            </div>
+                        `);
+                    }
+                </script>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
