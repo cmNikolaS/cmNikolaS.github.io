@@ -104,3 +104,13 @@ document.addEventListener("DOMContentLoaded", function() {
         toggleSizeButton.textContent = solutionContainer.classList.contains('expanded') ? "Collapse Solution" : "Expand Solution";
     });
 });
+// Tab switching
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+});

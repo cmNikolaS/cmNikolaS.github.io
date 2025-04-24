@@ -1,108 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RPZ - Competition Problems</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #1A1A1F;
-            color: #ffffff;
-        }
+<meta charset="UTF-8">
+<title>RPZ - Competition Problems</title>
+<link rel="stylesheet" href="styles.css">
+<style>/* INTJ-Inspired Style */
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background-color: #1e1e1e;
-            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
-        }
-
-        h1 {
-            font-size: 24px;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
-
-        nav a {
-            color: #ffffff;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            color: #00bcd4;
-        }
-
-        section {
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .competition-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .competition-row {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
-
-        .competition-title {
-            font-size: 2rem;
-            color: #ce1717;
-            margin-bottom: 20px;
-        }
-
-        .year-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 20px;
-            width: 100%;
-            max-width: 900px;
-        }
-
-        .year-card {
-            background-color: #222;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(191, 174, 194, 0.1);
-        }
-
-        .year-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
-        }
-
-        .year-card a {
-            color: #00bcd4;
-            text-decoration: none;
-            font-size: 1.2rem;
-        }
-
-        .year-card a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        font-family: 'Segoe UI', Roboto, sans-serif;
+        background-color: #0F0F1A; /* deep dark blue-gray */
+        color: #E0E0E0; /* soft silver-gray text */
+        line-height: 1.6;
+        padding-bottom: 40px;
+    }
+    
+    header {
+        background-color: #1A1A2E;
+        padding: 20px;
+        border-bottom: 2px solid #5A5A89;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+    
+    header h1 {
+        font-size: 2rem;
+        color: #C2C2FF; /* subdued violet */
+        text-align: center;
+    }
+    
+    nav ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        margin-top: 10px;
+    }
+    
+    nav ul li {
+        margin: 0 15px;
+    }
+    
+    nav ul li a {
+        color: #AFAFDA;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+    
+    nav ul li a:hover {
+        color: #FFFFFF;
+    }
+    
+    .competition-container {
+        padding: 40px;
+        max-width: 1000px;
+        margin: auto;
+    }
+    
+    .competition-row {
+        margin-bottom: 40px;
+    }
+    
+    .competition-title {
+        font-size: 1.8rem;
+        color: #B3B3FF;
+        margin-bottom: 20px;
+        border-left: 4px solid #5A5A89;
+        padding-left: 10px;
+    }
+    
+    .year-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 15px;
+    }
+    
+    .year-card {
+        background-color: #1F1F2F;
+        border: 1px solid #444;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        transition: all 0.2s ease;
+    }
+    
+    .year-card a {
+        color: #AFAFDA;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    
+    .year-card:hover {
+        background-color: #292943;
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
+    
+    .tab {
+        padding: 10px 20px;
+        margin-right: 10px;
+        background-color: #1A1A2E;
+        color: #AFAFDA;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px 5px 0 0;
+        transition: background 0.3s;
+    }
+    
+    .tab:hover,
+    .tab.active {
+        background-color: #292943;
+        color: #FFFFFF;
+    }
+    
+    .content {
+        display: none;
+        background-color: #1F1F2F;
+        padding: 20px;
+        border-radius: 0 0 10px 10px;
+        border-top: 1px solid #5A5A89;
+    }
+    
+    .content.active {
+        display: block;
+    }
+    
+    pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        background-color: #0D0D16;
+        color: #E0E0E0;
+        padding: 20px;
+        border-radius: 8px;
+        overflow-x: auto;
+        border: 1px solid #333;
+    }
+    
+    /* Scrollbar customization for that precise INTJ control */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #0F0F1A;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #444;
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #666;
+    }
+    
+</style>
 </head>
 <body>
     <header>
@@ -116,7 +169,7 @@
     </header>
 
     <section class="competition-container">
-        <!-- Regional Competitions FIRST -->
+        <!-- Regional Competitions -->
         <div class="competition-row">
             <h2 class="competition-title">REGIONAL</h2>
             <div class="year-grid">
@@ -124,14 +177,15 @@
                     for (let year = 2025; year >= 2012; year--) {
                         document.write(`
                             <div class="year-card">
-                                <a href="/RPZ/PAGES/regional_${year}.html">${year}</a>
+                                <a href="/RPZ/viewer.html?type=REGIONAL&year=${year}">${year}</a>
                             </div>
                         `);
                     }
                 </script>
             </div>
         </div>
-        <!-- Republic Competitions SECOND -->
+
+        <!-- Republic Competitions -->
         <div class="competition-row">
             <h2 class="competition-title">REPUBLIC</h2>
             <div class="year-grid">
@@ -139,7 +193,7 @@
                     for (let year = 2025; year >= 2012; year--) {
                         document.write(`
                             <div class="year-card">
-                                <a href="/RPZ/PAGES/republic_${year}.html">${year}</a>
+                                <a href="/RPZ/viewer.html?type=REPUBLIC&year=${year}">${year}</a>
                             </div>
                         `);
                     }
@@ -147,5 +201,64 @@
             </div>
         </div>
     </section>
+
+    <script>
+        // Fetch the type and year parameters from the URL
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                type: params.get('type'), // REGIONAL or REPUBLIC
+                year: params.get('year')  // year (e.g., 2025)
+            };
+        }
+    
+        function loadData(problemNumber) {
+            const { type, year } = getQueryParams();
+    
+            // Set the page title
+            document.title = `RPZ - ${type.charAt(0).toUpperCase() + type.slice(1)} ${year} Problem ${problemNumber}`;
+    
+            // Load the problem PDF
+            const problemPdf = document.getElementById('problem-pdf');
+            problemPdf.src = `/RPZ/${type.toUpperCase()}/${year}/${problemNumber}.pdf`;  // Ensure the type is uppercase
+    
+            // Load the solution (make sure the file path is case-sensitive)
+            fetch(`/RPZ/${type.toUpperCase()}/${year}/${problemNumber}.cpp`)  // Ensure the type is uppercase
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('solution-content').textContent = data;
+                });
+    
+            // Load test cases
+            fetch(`/RPZ/${type.toUpperCase()}/${year}/test_cases_${problemNumber}.txt`)  // Ensure the type is uppercase
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('test-cases-content').textContent = data;
+                });
+    
+            // Set the active tab and content
+            showTab('problem');
+        }
+    
+        function showTab(tab) {
+            // Hide all contents
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => content.classList.remove('active'));
+    
+            // Show the selected tab's content
+            document.getElementById(tab).classList.add('active');
+    
+            // Update the active tab class
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(t => t.classList.remove('active'));
+            document.querySelector(`.tab[onclick="showTab('${tab}')"]`).classList.add('active');
+        }
+    
+        // Load data when page is loaded
+        window.onload = () => {
+            const firstProblem = 1; // Default to the first problem on load
+            loadData(firstProblem);
+        };
+    </script>
 </body>
 </html>

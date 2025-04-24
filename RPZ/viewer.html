@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RPZ - Competition Problems</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+    /* Global styles */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    header {
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+    }
+
+    header h1 {
+        margin: 0;
+    }
+
+    nav {
+        margin-top: 10px;
+    }
+
+    nav ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    nav ul li {
+        display: inline;
+        margin-right: 20px;
+    }
+
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    nav ul li a:hover {
+        text-decoration: underline;
+    }
+
+    /* Main content container */
+    .competition-container {
+        padding: 20px;
+        max-width: 1200px;
+        margin: auto;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    /* Tabs and tab content */
+    .tabs {
+        display: flex;
+        margin-bottom: 20px;
+    }
+
+    .tab {
+        padding: 10px 20px;
+        background-color: #f1f1f1;
+        border: 1px solid #ddd;
+        cursor: pointer;
+        display: inline-block;
+        margin-right: 5px;
+        transition: background-color 0.3s;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .tab:hover {
+        background-color: #ddd;
+    }
+
+    .tab.active {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+    }
+
+    .tab-content {
+        display: none;
+        margin-top: 20px;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+
+    /* Content Styling */
+    .year-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: flex-start;
+    }
+
+    .year-card {
+        background-color: #fff;
+        border: 2px solid #333;
+        padding: 15px;
+        text-align: center;
+        width: 100px;
+        transition: transform 0.3s ease;
+    }
+
+    .year-card:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+
+    .year-card a {
+        text-decoration: none;
+        color: #333;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .year-card a:hover {
+        color: #007bff;
+    }
+
+    /* PDF Viewer */
+    #problem-pdf {
+        width: 100%;
+        height: 600px;
+        border: 1px solid #ccc;
+    }
+
+    /* Solution and test case styling */
+    .solution-container, .test-cases-container {
+        margin-top: 20px;
+        background-color: white;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .solution-container pre, .test-cases-container pre {
+        font-family: "Courier New", monospace;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        background-color: #f9f9f9;
+        padding: 10px;
+        border-radius: 5px;
+    }
+</style>
+</head>
+<body>
+    <header>
+        <h1>RPZ - Takmičarski Zadaci</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Početna</a></li>
+                <li><a href="#">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="competition-container">
+        <!-- Tabs for problem, solution, and test cases -->
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('problem')">Problem</div>
+            <div class="tab" onclick="showTab('solution')">Solution</div>
+            <div class="tab" onclick="showTab('test-cases')">Test Cases</div>
+        </div>
+
+        <!-- Tab content -->
+        <div id="problem" class="tab-content active">
+            <div class="problem-container">
+                <h2>Problem Statement</h2>
+                <embed id="problem-pdf" src="" type="application/pdf">
+            </div>
+        </div>
+
+        <div id="solution" class="tab-content">
+            <div class="solution-container">
+                <h2>Solution</h2>
+                <pre id="solution-content"></pre>
+            </div>
+        </div>
+
+        <div id="test-cases" class="tab-content">
+            <div class="test-cases-container">
+                <h2>Test Cases</h2>
+                <pre id="test-cases-content"></pre>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Fetch the type and year parameters from the URL
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                type: params.get('type'), // REGIONAL or REPUBLIC
+                year: params.get('year')  // year (e.g., 2025)
+            };
+        }
+
+        function loadData(problemNumber) {
+            const { type, year } = getQueryParams();
+    
+            // Set the page title
+            document.title = `RPZ - ${type.charAt(0).toUpperCase() + type.slice(1)} ${year} Problem ${problemNumber}`;
+    
+            // Load the problem PDF
+            const problemPdf = document.getElementById('problem-pdf');
+            problemPdf.src = `/RPZ/${type.toUpperCase()}/${year}/${problemNumber}.pdf`;  // Ensure the type is uppercase
+    
+            // Load the solution (make sure the file path is case-sensitive)
+            fetch(`/RPZ/${type.toUpperCase()}/${year}/${problemNumber}.cpp`)  // Ensure the type is uppercase
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('solution-content').textContent = data;
+                });
+    
+            // Load test cases
+            fetch(`/RPZ/${type.toUpperCase()}/${year}/test_cases_${problemNumber}.txt`)  // Ensure the type is uppercase
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('test-cases-content').textContent = data;
+                });
+        }
+
+        function showTab(tab) {
+            // Hide all contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+    
+            // Show the selected tab's content
+            document.getElementById(tab).classList.add('active');
+    
+            // Update the active tab class
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(t => t.classList.remove('active'));
+            document.querySelector(`.tab[onclick="showTab('${tab}')"]`).classList.add('active');
+        }
+
+        // Load data when page is loaded
+        window.onload = () => {
+            const firstProblem = 1; // Default to the first problem on load
+            loadData(firstProblem);
+        };
+    </script>
+</body>
+</html>
